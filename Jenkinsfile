@@ -17,11 +17,11 @@ pipeline {
                 }
             }
         }
-        stage('Push image to Hub'){
+       stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'docerhub', variable: 'dockerhubpwd')]) {
-                   sh 'docker login -u wiztex -p ${dockerhubpwd}'
+                   withCredentials([usernamePassword(credentialsId: 'dockerhubpwd', usernameVariable: 'username', passwordVariable: 'password')]) {
+                   sh 'docker login -u ${username} -p ${password}'
 
 }
                    sh 'docker push wiztex/devops-integration'
